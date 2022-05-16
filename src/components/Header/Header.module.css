@@ -1,20 +1,8 @@
 .header {
     height: 50px;
-    background-color: rgb(49, 48, 48);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-;
-
-.input {
-    width: calc(100% - 30px);
-}
-
-.header {
-    height: 50px;
     background-color: rgb(43, 43, 43);
+    background-color: url(../../assets/images/header.jpg);
+    background-size: cover;
     display: flex;
     justify-content: center;
     align-items: center;
