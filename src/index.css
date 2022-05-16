@@ -11,3 +11,8 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.imput-text {
+  border-radius: 5px;
+  border: 1px solid rgb(54, 54, 54);
+}
