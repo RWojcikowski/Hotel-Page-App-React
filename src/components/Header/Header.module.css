@@ -11,3 +11,13 @@
 .input {
     width: calc(100% - 30px);
 }
+
+.header {
+    height: 50px;
+    background-color: rgb(43, 43, 43);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 50px 15px;
+
+}
