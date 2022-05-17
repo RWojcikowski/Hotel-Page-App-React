@@ -1,6 +1,6 @@
 .header {
     height: 50px;
-    background-color: rgb(43, 43, 43);
+    background-color: rgb(138, 136, 136);
     background-color: url(../../assets/images/header.jpg);
     background-size: cover;
     display: flex;

@@ -3,18 +3,16 @@ import React from 'react'
 
 function Searchbar() {
     return (
-        <div className='d-flex'>
+        <div className="d-flex">
             <input
-                // style={{
-                //     width: 'calc(100 % - 30px)'
-                // }}
+
                 className=""
                 type="text"
                 placeholder="Szukaj..." />
 
-            <div className="col">
+            <div className="col-12">
                 <button
-                    className="btn btn-secondary">Szukaj</button>
+                    className="ml-2 btn btn-info">Szukaj</button>
 
             </div>
         </div>
