@@ -1,41 +1,33 @@
-import React, { useState } from 'react'
-
+import React, { useState } from 'react';
 
 function Searchbar() {
-    const [term, setTerm] = useState('')
+  const [term, setTerm] = useState('');
 
-    const search = () => {
-        console.log('szukaj', term)
+  const search = () => {
+    console.log('szukaj!', term);
+  }
+  const onKeyDownHandler = e => {
+    if (e.key === 'Enter') {
+      search();
     }
-    const updateTerm = (e) => {
-        setTerm(e.target.value);
-        console.log(e.target.value);
-    }
-    const onKeyDownHandler = e => {
-        if (e.key === 'Enter') {
-            search()
-        }
-    }
+  }
 
-    return (
-        <div className="d-flex">
-            <input
-                value={term}
-                onKeyDown={onKeyDownHandler}
-                onChange={updateTerm}
-                className="form-control"
-                type="text"
-                placeholder="Szukaj..." />
-
-            <div className="col-12">
-                <button
-                    onClilck={search}
-                    className="ml-2 btn btn-info">Szukaj</button>
-
-            </div>
-        </div>
-    )
-
-
+  return (
+    <div className="d-flex">
+      <input
+        value={term}
+        onKeyDown={onKeyDownHandler}
+        onChange={e => setTerm(e.target.value)}
+        className="form-control"
+        type="text"
+        placeholder="Szukaj..." />
+      <button
+        onClick={search}
+        className="ml-1 btn btn-secondary">
+        Szukaj
+      </button>
+    </div>
+  );
 }
+
 export default Searchbar;

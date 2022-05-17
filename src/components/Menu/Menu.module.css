@@ -1,17 +1,15 @@
 .menu {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  text-align: left;
 }
 
 .menuItem {
-    display: inline-block;
+  display: inline-block;
 }
 
 .menuContainer {
-    border: 1px solid #cdcdcd;
-    margin: 10px 0;
-    background-color: rgb(138, 136, 136);
-    color: white;
+  border: 1px solid #cdcdcd;
+  margin: 10px 0;
 }
