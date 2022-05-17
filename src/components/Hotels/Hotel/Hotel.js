@@ -20,8 +20,8 @@ function Hotel() {
           <div className="col-8">
             <div className="row">
               <div className="col">
-                <p>Pensjonat</p>
-                <p>Wrocław</p>
+                <h4>Pensjonat</h4>
+                <h4>Wrocław</h4>
               </div>
               <div className="col float-end">
                 <h4>

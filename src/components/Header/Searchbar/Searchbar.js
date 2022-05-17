@@ -2,20 +2,28 @@ import React, { useState } from 'react'
 
 
 function Searchbar() {
-    const [term, setTerm] = useState()
+    const [term, setTerm] = useState('')
 
     const search = () => {
-        console.log('szukaj')
+        console.log('szukaj', term)
     }
     const updateTerm = (e) => {
-
+        setTerm(e.target.value);
+        console.log(e.target.value);
     }
+    const onKeyDownHandler = e => {
+        if (e.key === 'Enter') {
+            search()
+        }
+    }
+
     return (
         <div className="d-flex">
             <input
                 value={term}
+                onKeyDown={onKeyDownHandler}
                 onChange={updateTerm}
-                className=""
+                className="form-control"
                 type="text"
                 placeholder="Szukaj..." />
 
