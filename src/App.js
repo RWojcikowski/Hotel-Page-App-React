@@ -31,7 +31,7 @@ class App extends Component {
 
   };
 
-  searchHandler(term) {
+  searchHandler = (term) => {
     const hotels = [...this.hotels]
       .filter(x => x.name
         .toLowerCase()
@@ -42,7 +42,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <Header onSearch={term => this.searchHandler(term)} />
+        <Header onSearch={this.searchHandler} />
         <Menu />
         <Hotels hotels={this.state.hotels} />
       </div>
