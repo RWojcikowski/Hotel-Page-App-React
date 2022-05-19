@@ -3,7 +3,7 @@ import './App.css';
 import Header from './components/Header/Header';
 import Menu from './components/Menu/Menu';
 import Hotels from './components/Hotels/Hotels';
-
+import LoadingIcon from './components/UI/LoadingIcon';
 
 class App extends Component {
 
@@ -27,7 +27,8 @@ class App extends Component {
   ];
 
   state = {
-    hotels: this.hotels
+    hotels: [],
+    loading: true,
 
   };
 
@@ -39,12 +40,27 @@ class App extends Component {
     this.setState({ hotels });
   }
 
+  componentDidMount() {
+    setTimeout(() => {
+      this.setState({
+        hotels: this.hotels,
+        loading: false
+      });
+    }, 1500);
+
+    console.log('zamontowany');
+  }
+
   render() {
+    console.log('Wyrederowany');
     return (
       <div className="App">
         <Header onSearch={this.searchHandler} />
         <Menu />
-        <Hotels hotels={this.state.hotels} />
+        {this.state.loading ? (
+          <LoadingIcon />
+        ) : (<Hotels hotels={this.state.hotels} />)}
+
       </div>
     );
   }
