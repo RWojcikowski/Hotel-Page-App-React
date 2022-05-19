@@ -1,6 +1,10 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 
 
+const propTypes = {
+  onSearch: PropTypes.func.isRequired
+};
 
 function Searchbar(props) {
   const [term, setTerm] = useState('');
@@ -32,5 +36,8 @@ function Searchbar(props) {
     </div>
   );
 }
+
+Searchbar.protoTypes = propTypes;
+
 
 export default Searchbar;

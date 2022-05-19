@@ -12,7 +12,7 @@ class App extends Component {
       id: 1,
       name: 'Pod Gruszą ',
       city: 'Warszawa ',
-      rating: ' 8.3 ',
+      rating: 8.3,
       discription: ' Lorem Ipsum jest tekstem stosowanym jako przykładowy wypełniacz w przemyśle',
       image: ''
     },
@@ -20,7 +20,7 @@ class App extends Component {
       id: 2,
       name: 'Debowy Sad ',
       city: 'Wrocław ',
-      rating: ' 8.8 ',
+      rating: 8.8,
       discription: ' Lorem Ipsum jest tekstem stosowanym jako przykładowy wypełniacz w przemyśle',
       image: ''
     }

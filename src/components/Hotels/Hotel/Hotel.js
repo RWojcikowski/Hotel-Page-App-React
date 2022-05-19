@@ -1,6 +1,17 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 import styles from './Hotel.module.css';
 import hotelImg from '../../../assets/images/hotel.jpg';
+
+const propTypes = {
+
+  names: PropTypes.string.isRequired,
+  city: PropTypes.string.isRequired,
+  rating: PropTypes.number.isRequired,
+  discription: PropTypes.string.isRequired,
+
+};
+
 
 function Hotel(props) {
   return (
@@ -9,6 +20,7 @@ function Hotel(props) {
 
         <div className="row">
           <div className="col-4">
+
             <img
               src={hotelImg}
               alt=""
@@ -18,7 +30,7 @@ function Hotel(props) {
             <div className="row">
               <div className="col">
                 <p className={styles.title}>{props.name}</p>
-                <span className="badge badge-light">{props.city}</span>
+                <span class="badge bg-info">{props.city}</span>
               </div>
               <div className="col text-right">
                 <h5>Ocena:{props.rating}</h5>
@@ -38,5 +50,8 @@ function Hotel(props) {
     </div>
   );
 }
+Hotel.propTypes = propTypes;
+
+
 
 export default Hotel;
