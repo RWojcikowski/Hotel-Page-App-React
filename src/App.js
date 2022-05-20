@@ -3,7 +3,8 @@ import './App.css';
 import Header from './components/Header/Header';
 import Menu from './components/Menu/Menu';
 import Hotels from './components/Hotels/Hotels';
-import LoadingIcon from './components/UI/LoadingIcon';
+import LoadingIcon from './components/UI/LoadingIcon/LoadingIcon';
+import Searchbar from './components/UI/Searchbar/Searchbar';
 
 class App extends Component {
 
@@ -55,7 +56,9 @@ class App extends Component {
     console.log('Wyrederowany');
     return (
       <div className="App">
-        <Header onSearch={this.searchHandler} />
+        <Header>
+          <Searchbar onSearch={term => this.searchHandler(term)} />
+        </Header>
         <Menu />
         {this.state.loading ? (
           <LoadingIcon />

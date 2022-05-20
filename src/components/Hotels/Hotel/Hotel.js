@@ -33,7 +33,7 @@ function Hotel(props) {
                 <span class="badge bg-info">{props.city}</span>
               </div>
               <div className="col text-right">
-                <h5>Ocena:{props.rating}</h5>
+                <h5>Ocena: {props.rating}</h5>
                 <a href="#" className="btn btn-info mt-2 px-4">Pokaż</a>
               </div>
             </div>
