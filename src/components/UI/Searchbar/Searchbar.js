@@ -4,10 +4,12 @@ import PropTypes from 'prop-types';
 
 const propTypes = {
   onSearch: PropTypes.func.isRequired
+
 };
 
 function Searchbar(props) {
   const [term, setTerm] = useState('');
+  const theme = 'Info'
 
   const search = () => {
     // console.log('szukaj!', term);
@@ -30,7 +32,7 @@ function Searchbar(props) {
         placeholder="Szukaj..." />
       <button
         onClick={search}
-        className="ml-1 btn btn-info">
+        className={`ml-1 btn btn-${theme}`}>
         Szukaj
       </button>
     </div>

@@ -7,6 +7,7 @@ import LoadingIcon from './components/UI/LoadingIcon/LoadingIcon';
 import Searchbar from './components/UI/Searchbar/Searchbar';
 import Layout from './components/Layout/Layout';
 import Footer from './components/Footer/Footer';
+import ThemeButton from './components/UI/ThemeButton/ThemeButton';
 
 class App extends Component {
 
@@ -32,6 +33,7 @@ class App extends Component {
   state = {
     hotels: [],
     loading: true,
+    theme: 'info'
 
   };
 
@@ -54,6 +56,11 @@ class App extends Component {
     console.log('zamontowany');
   }
 
+  changeTheme = () => {
+    const newTheme = this.state.theme === 'info' ? 'dark' : 'info';
+    this.setStat({ theme: newTheme });
+  }
+
   render() {
     console.log('Wyrederowany');
     return (
@@ -62,17 +69,22 @@ class App extends Component {
 
           header={
             <Header>
-              <Searchbar onSearch={term => this.searchHandler(term)} />
+              <Searchbar
+                onSearch={term => this.searchHandler(term)}
+                theme={this.state.theme} />
+              <ThemeButton onChange={this.changeTheme} />
             </Header>}
 
-          menu={<Menu />}
+          menu={<Menu theme={this.state.theme} />}
           content={
             this.state.loading
-              ? <LoadingIcon />
-              : <Hotels hotels={this.state.hotels} />
+              ? <LoadingIcon
+                hotels={this.state.hotels} />
+              : <Hotels
+                hotels={this.state.hotels} />
           }
 
-          footer={<Footer />}
+          footer={<Footer theme={this.state.theme} />}
         />
 
 
