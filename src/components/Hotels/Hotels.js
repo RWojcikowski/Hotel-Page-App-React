@@ -4,7 +4,7 @@ import Hotel from './Hotel/Hotel';
 import styles from './Hotels.module.css';
 
 const propTypes = {
-  hotels: PropTypes.array.isRequired
+  hotels: PropTypes.array.isRequired,
 }
 class Hotels extends Component {
   render() {
@@ -12,10 +12,8 @@ class Hotels extends Component {
       <div className={styles.container}>
         <h2 className={styles.title}>Oferty:</h2>
         {this.props.hotels.map(hotel => (
-          <Hotel
-            key={hotel.id} {...hotel}
-            theme={this.props.theme}
-          />
+          <Hotel 
+            key={hotel.id} {...hotel} />
         ))}
       </div>
     );

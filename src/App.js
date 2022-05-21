@@ -8,9 +8,10 @@ import Searchbar from './components/UI/Searchbar/Searchbar';
 import Layout from './components/Layout/Layout';
 import Footer from './components/Footer/Footer';
 import ThemeButton from './components/UI/ThemeButton/ThemeButton';
+import ThemeContext from './context/themeContext';
+
 
 class App extends Component {
-
   hotels = [
     {
       id: 1,
@@ -22,22 +23,20 @@ class App extends Component {
     },
     {
       id: 2,
-      name: 'Debowy Sad ',
+      name: 'Dębowy Sad ',
       city: 'Wrocław ',
       rating: 8.8,
       discription: ' Lorem Ipsum jest tekstem stosowanym jako przykładowy wypełniacz w przemyśle',
       image: ''
     }
   ];
-
   state = {
     hotels: [],
     loading: true,
     theme: 'info'
 
   };
-
-  searchHandler = (term) => {
+  searchHandler(term) {
     const hotels = [...this.hotels]
       .filter(x => x.name
         .toLowerCase()
@@ -51,50 +50,47 @@ class App extends Component {
         hotels: this.hotels,
         loading: false
       });
-    }, 1500);
-
-    console.log('zamontowany');
+    }, 1000);
   }
 
   changeTheme = () => {
     const newTheme = this.state.theme === 'info' ? 'dark' : 'info';
-    this.setStat({ theme: newTheme });
+    this.setState({ theme: newTheme });
   }
 
   render() {
-    console.log('Wyrederowany');
-    return (
-      <div className="App">
-        <Layout
-
-          header={
-            <Header>
-              <Searchbar
-                onSearch={term => this.searchHandler(term)}
-                theme={this.state.theme} />
-              <ThemeButton onChange={this.changeTheme} />
-            </Header>}
-
-          menu={<Menu theme={this.state.theme} />}
-          content={
-            this.state.loading
-              ? <LoadingIcon
-                hotels={this.state.hotels} />
-              : <Hotels
-                hotels={this.state.hotels} />
-          }
-
-          footer={<Footer theme={this.state.theme} />}
+    const header = (
+      <Header>
+        <Searchbar
+          onSearch={term => this.searchHandler(term)}
         />
+        <ThemeButton />
+      </Header>
+    );
+    const content = (
+      this.state.loading
+        ? <LoadingIcon />
+        : <Hotels hotels={this.state.hotels} />
+    );
+    const menu = <Menu />;
+    const footer = <Footer />;
 
+    return (
 
+      <ThemeContext.Provider value={{
+        color: this.state.theme,
+        changeTheme: this.changeTheme
+      }}>
+        <Layout
+          header={header}
+          menu={menu}
+          content={content}
+          footer={footer}
+        />
+      </ThemeContext.Provider>
 
-
-      </div>
     );
   }
 }
 
 export default App;
-
-

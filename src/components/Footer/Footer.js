@@ -1,6 +1,13 @@
-const Footer = (props) => (
-    <div className={`text-center m-3 text-${props.theme}`} info >Hotel-page-app 2022</div>
+import { useContext } from 'react';
+import ThemeContext from '../../context/themeContext';
 
-)
+const Footer = (props) => {
+  const theme = useContext(ThemeContext);
+  return (
+    <div className={`text-center m-3 text-${theme.color}`}>
+      noclegi 2021
+    </div>
+  );
+}
 
 export default Footer;

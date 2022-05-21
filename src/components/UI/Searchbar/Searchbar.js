@@ -1,18 +1,16 @@
-import React, { useState } from 'react';
+import { useContext, useState } from 'react';
 import PropTypes from 'prop-types';
-
+import ThemeContext from '../../../context/themeContext';
 
 const propTypes = {
   onSearch: PropTypes.func.isRequired
-
 };
 
 function Searchbar(props) {
   const [term, setTerm] = useState('');
-  const theme = 'Info'
+  const theme = useContext(ThemeContext);
 
   const search = () => {
-    // console.log('szukaj!', term);
     props.onSearch(term);
   }
   const onKeyDownHandler = e => {
@@ -32,14 +30,13 @@ function Searchbar(props) {
         placeholder="Szukaj..." />
       <button
         onClick={search}
-        className={`ml-1 btn btn-${theme}`}>
+        className={`ml-1 btn btn-${theme.color}`}>
         Szukaj
       </button>
     </div>
   );
 }
 
-Searchbar.protoTypes = propTypes;
-
+Searchbar.propTypes = propTypes;
 
 export default Searchbar;

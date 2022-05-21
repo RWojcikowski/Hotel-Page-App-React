@@ -1,11 +1,16 @@
+import { useContext } from 'react';
+import ThemeContext from '../../../context/themeContext';
+
 export default function LoadingIcon(props) {
-    return (
+  const theme = useContext(ThemeContext);
 
-        <div class="d-flex justify-content-center">
-            <div class={`spinner-border text-${props.theme}`} role="status">
-                <span class="visually-hidden">Ładowanie...</span>
-            </div>
-        </div>
-    )
+  return (
+    <div className="d-flex justify-content-center">
+      <div className={`spinner-border m-5 text-${theme.color}`} role="status">
+        <span className="sr-only">
 
+        </span>
+      </div>
+    </div>
+  );
 }
