@@ -9,33 +9,35 @@ import Layout from './components/Layout/Layout';
 import Footer from './components/Footer/Footer';
 import ThemeButton from './components/UI/ThemeButton/ThemeButton';
 import ThemeContext from './context/themeContext';
-
+import AuthContext from './context/authContext';
 
 class App extends Component {
   hotels = [
     {
       id: 1,
-      name: 'Pod Gruszą ',
-      city: 'Warszawa ',
+      name: 'Pod Dębem',
+      city: 'Warszawa',
       rating: 8.3,
-      discription: ' Lorem Ipsum jest tekstem stosowanym jako przykładowy wypełniacz w przemyśle',
+      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque consequat id lorem vitae accumsan.',
       image: ''
     },
     {
       id: 2,
-      name: 'Dębowy Sad ',
-      city: 'Wrocław ',
+      name: 'Nad Potokiem',
+      city: 'Wrosław',
       rating: 8.8,
-      discription: ' Lorem Ipsum jest tekstem stosowanym jako przykładowy wypełniacz w przemyśle',
+      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque consequat id lorem vitae accumsan.',
       image: ''
     }
   ];
   state = {
     hotels: [],
     loading: true,
-    theme: 'info'
+    theme: 'info',
+    isAuthenticated: false
 
   };
+
   searchHandler(term) {
     const hotels = [...this.hotels]
       .filter(x => x.name
@@ -76,19 +78,23 @@ class App extends Component {
     const footer = <Footer />;
 
     return (
-
-      <ThemeContext.Provider value={{
-        color: this.state.theme,
-        changeTheme: this.changeTheme
+      <AuthContext.Provider value={{
+        isAuthenticated: this.state.isAuthenticated,
+        login: this.login,
+        logout: this.logout
       }}>
-        <Layout
-          header={header}
-          menu={menu}
-          content={content}
-          footer={footer}
-        />
-      </ThemeContext.Provider>
-
+        <ThemeContext.Provider value={{
+          color: this.state.theme,
+          changeTheme: this.changeTheme
+        }}>
+          <Layout
+            header={header}
+            menu={menu}
+            content={content}
+            footer={footer}
+          />
+        </ThemeContext.Provider>
+      </AuthContext.Provider>
     );
   }
 }
