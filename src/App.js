@@ -1,4 +1,4 @@
-import { useEffect, useReducer, useState } from 'react';
+import { useEffect, useReducer, } from 'react';
 import './App.css';
 import Header from './components/Header/Header';
 import Menu from './components/Menu/Menu';
@@ -59,9 +59,6 @@ const initialState = {
 }
 
 function App() {
-
-
-  // const [theme, setTheme] = useState('info');
   const [state, dispatch] = useReducer(reducer, initialState);
 
 
@@ -71,7 +68,6 @@ function App() {
       .filter(x => x.name
         .toLowerCase()
         .includes(term.toLowerCase()));
-    // setHotels(newHotels);
     dispatch({ type: 'set-hotels', hotels: newHotels });
   }
 

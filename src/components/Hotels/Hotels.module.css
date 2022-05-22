@@ -1,8 +1,8 @@
 .container {
-  border: 1px solid #cdcdcd;
   margin: 10px 0;
-  padding: 20px;
+  padding: 20px 0;
 }
+
 .title {
   font-weight: bold;
   font-size: 1.2rem;
