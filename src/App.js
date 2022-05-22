@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useReducer, useState } from 'react';
 import './App.css';
 import Header from './components/Header/Header';
 import Menu from './components/Menu/Menu';
@@ -32,31 +32,53 @@ const backendHotels = [
 ];
 
 
+const reducer = (state, action) => {
+  //...
+  switch (action.type) {
+    case 'change-theme':
+      const theme = state.theme === 'info' ? 'dark' : 'info'
+      return { ...state, theme };
+    case 'set-hotels':
+      return { ...state, hotels: action.hotels };
+    case 'set-loading':
+      return { ...state, loading: action.loading };
+    case 'login':
+      return { ...state, isAuthenticated: true };
+    case 'logout':
+      return { ...state, isAuthenticated: false };
+    default:
+      throw new Error(' Nie ma takiej Akcji: ' + action.type)
+  }
+}
 
+const initialState = {
+  hotels: [],
+  loading: true,
+  isAuthenticated: false,
+  theme: 'info',
+}
 
 function App() {
-  const [hotels, setHotels] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [theme, setTheme] = useState('info');
-  const [isAuthenticated, setIsAuthenticated] = useState(false)
 
-  const changeTheme = () => {
-    const newTheme = theme === 'info' ? 'dark' : 'info';
-    setTheme(newTheme)
-  }
+
+  // const [theme, setTheme] = useState('info');
+  const [state, dispatch] = useReducer(reducer, initialState);
+
+
 
   const searchHandler = term => {
     const newHotels = [...backendHotels]
       .filter(x => x.name
         .toLowerCase()
         .includes(term.toLowerCase()));
-    setHotels(newHotels);
+    // setHotels(newHotels);
+    dispatch({ type: 'set-hotels', hotels: newHotels });
   }
 
   useEffect(() => {
     setTimeout(() => {
-      setHotels(backendHotels);
-      setLoading(false)
+      dispatch({ type: 'set-hotels', hotels: backendHotels });
+      dispatch({ type: 'set-loading', loading: false });
     }, 1000);
   }, []);
 
@@ -70,9 +92,9 @@ function App() {
     </Header>
   );
   const content = (
-    loading
+    state.loading
       ? <LoadingIcon />
-      : <Hotels hotels={hotels} />
+      : <Hotels hotels={state.hotels} />
   );
   const menu = <Menu />;
   const footer = <Footer />;
@@ -81,13 +103,13 @@ function App() {
 
   return (
     <AuthContext.Provider value={{
-      isAuthenticated: isAuthenticated,
-      login: () => setIsAuthenticated(true),
-      logout: () => setIsAuthenticated(false)
+      isAuthenticated: state.isAuthenticated,
+      login: () => dispatch({ type: 'login' }),
+      logout: () => dispatch({ type: 'logout' }),
     }}>
       <ThemeContext.Provider value={{
-        color: theme,
-        changeTheme: changeTheme
+        color: state.theme,
+        changeTheme: () => dispatch({ type: 'change-theme' })
       }}>
         <Layout
           header={header}
