@@ -1,5 +1,5 @@
 const BestHotel = (props) => {
-    const hotel = props.getHotel();
+    const hotel = props.getHotel({ minHotels: 1 });
 
     if (!hotel) return null;
 
