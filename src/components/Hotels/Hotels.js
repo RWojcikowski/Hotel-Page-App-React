@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { memo, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import Hotel from './Hotel/Hotel';
 import styles from './Hotels.module.css';
@@ -6,12 +6,20 @@ import styles from './Hotels.module.css';
 const propTypes = {
   hotels: PropTypes.array.isRequired,
 }
+
+const slowFunction = (count) => {
+  for (let i = 0; i < 500000000; i++) { }
+  return count
+
+}
+
 function Hotels(props) {
 
-  useEffect(() => console.log('Hotels render'));
+  const count = slowFunction(props.hotels.length)
+
   return (
     <div className={styles.container}>
-      <h2 className={styles.title}>Oferty:</h2>
+      <h2 className={styles.title}>Oferty: ({count}) </h2>
       {props.hotels.map(hotel => (
         <Hotel
           key={hotel.id} {...hotel} />
