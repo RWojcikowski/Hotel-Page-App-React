@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useReducer, } from 'react';
+import { useCallback, useEffect, useReducer, } from 'react';
 import './App.css';
 import Header from './components/Header/Header';
 import Menu from './components/Menu/Menu';
