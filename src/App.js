@@ -12,6 +12,7 @@ import ThemeContext from './context/themeContext';
 import AuthContext from './context/authContext';
 import BestHotel from './components/Hotels/Hotel/BestHotel/BestHotel';
 import InsporingQuote from './components/InsporingQuote/InsporingQuote';
+import useStateStorage from './components/hooks/useStateStorage';
 
 
 const backendHotels = [
@@ -62,6 +63,7 @@ const initialState = {
 
 function App() {
   const [state, dispatch] = useReducer(reducer, initialState);
+  const [storage, setStorage] = useStateStorage('klucz', 'Wartość startowa')
 
 
 
@@ -108,6 +110,11 @@ function App() {
       ? <LoadingIcon />
       : (
         <>
+          <input type='text'
+            value={storage}
+            onChange={e => setStorage(e.target.value)}>
+
+          </input>
           <BestHotel getHotel={getBestHotel} />
           <Hotels hotels={state.hotels} />
         </>
