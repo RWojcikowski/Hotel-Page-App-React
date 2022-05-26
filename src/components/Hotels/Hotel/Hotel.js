@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import styles from './Hotel.module.css';
-import hotelImg from '../../../assets/images/hotel.jpg'; 
+import hotelImg from '../../../assets/images/hotel.jpg';
 import ThemeContext from '../../../context/themeContext';
 import { useContext } from 'react';
 import useAuth from '../../../hooks/useAuth';
@@ -16,7 +16,7 @@ const propTypes = {
 function Hotel(props) {
   const theme = useContext(ThemeContext);
   const [auth] = useAuth();
-  
+
   const clickHandler = e => {
     e.preventDefault();
     props.onOpen(props);
@@ -25,7 +25,7 @@ function Hotel(props) {
   return (
     <div className={`card ${styles.hotel}`}>
       <div className="card-body">
-      
+
         <div className="row">
           <div className="col-4">
             <img
@@ -41,26 +41,26 @@ function Hotel(props) {
               </div>
               <div className="col text-right">
                 <h5>Ocena: {props.rating}</h5>
-                  <a 
-                    href="#"
-                    onClick={clickHandler}
-                    className={`btn btn-${theme.color} mt-2 px-4`}>
-                    Pokaż
-                  </a>
+                <a
+                  href="#"
+                  onClick={clickHandler}
+                  className={`btn btn-${theme.color} mt-2 px-4`}>
+                  Pokaż
+                </a>
               </div>
             </div>
           </div>
-          
+
           <div className="col-12">
             <p className={styles.description}>
               {props.description}
             </p>
 
-            {auth 
-              ? <p className="mt-2">Dostępność: 4 pokoje</p>
-              : <p className="mt-2">Dostępność: zaloguj</p>
+            {auth
+              ? <p className='mt-2'>Dostepność: 4 pokoje</p>
+              : <button href="#" className={`btn btn-${theme.color} mt-2`}>Zaloguj</button>
             }
-            
+
           </div>
         </div>
 
