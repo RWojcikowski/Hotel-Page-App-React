@@ -17,7 +17,7 @@ const styles = {
     left: 0,
     right: 0,
     textAlign: 'center',
-    color: '#fff',
+    color: '#10E8F8',
     fontSize: '0.9rem',
     fontStyle: 'italic',
 };
