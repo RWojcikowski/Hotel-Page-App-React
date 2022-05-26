@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useReducer, } from 'react';
+import { useEffect, useReducer } from 'react';
 import './App.css';
 import Header from './components/Header/Header';
 import Menu from './components/Menu/Menu';
@@ -10,10 +10,11 @@ import Footer from './components/Footer/Footer';
 import ThemeButton from './components/UI/ThemeButton/ThemeButton';
 import ThemeContext from './context/themeContext';
 import AuthContext from './context/authContext';
-import BestHotel from './components/Hotels/Hotel/BestHotel/BestHotel';
-import InsporingQuote from './components/InsporingQuote/InsporingQuote';
-import useStateStorage from './components/hooks/useStateStorage';
-
+import BestHotel from './components/Hotels/BestHotel/BestHotel';
+import InsporingQuote from './components/InspiringQuote/InspiringQuote';
+import LastHotel from './components/Hotels/LastHotel/LastHotel';
+import useStateStorage from './hooks/useStateStorage';
+import useWebsiteTitle from './hooks/useWebsiteTitle';
 
 const backendHotels = [
   {
@@ -34,9 +35,7 @@ const backendHotels = [
   }
 ];
 
-
 const reducer = (state, action) => {
-  //...
   switch (action.type) {
     case 'change-theme':
       const theme = state.theme === 'info' ? 'dark' : 'info'
@@ -50,11 +49,11 @@ const reducer = (state, action) => {
     case 'logout':
       return { ...state, isAuthenticated: false };
     default:
-      throw new Error(' Nie ma takiej Akcji: ' + action.type)
+      throw new Error('Nie ma takiej akcji: ' + action.type);
   }
 }
 
-const initialState = {
+const intialState = {
   hotels: [],
   loading: true,
   isAuthenticated: false,
@@ -62,10 +61,9 @@ const initialState = {
 }
 
 function App() {
-  const [state, dispatch] = useReducer(reducer, initialState);
-  const [storage, setStorage] = useStateStorage('klucz', 'Wartość startowa')
-
-
+  const [state, dispatch] = useReducer(reducer, intialState);
+  const [lastHotel, setLastHotel] = useStateStorage('last-hotel', null);
+  useWebsiteTitle('Strona główna');
 
   const searchHandler = term => {
     const newHotels = [...backendHotels]
@@ -75,18 +73,17 @@ function App() {
     dispatch({ type: 'set-hotels', hotels: newHotels });
   }
 
-
-
-  const getBestHotel = useCallback((options) => {
-    if (!state.hotels.lenght < options.minHotels
-    ) {
+  const getBestHotel = () => {
+    if (state.hotels.length < 2) {
       return null;
     } else {
       return state.hotels
         .sort((a, b) => a.rating > b.rating ? -1 : 1)[0];
     }
-  }, [state.hotels]);
+  }
 
+  const openHotel = (hotel) => setLastHotel(hotel);
+  const removeLastHotel = () => setLastHotel(null);
 
   useEffect(() => {
     setTimeout(() => {
@@ -100,8 +97,7 @@ function App() {
     <Header>
       <InsporingQuote />
       <Searchbar
-        onSearch={term => searchHandler(term)}
-      />
+        onSearch={term => searchHandler(term)} />
       <ThemeButton />
     </Header>
   );
@@ -110,20 +106,17 @@ function App() {
       ? <LoadingIcon />
       : (
         <>
-          <input type='text'
-            value={storage}
-            onChange={e => setStorage(e.target.value)}>
-
-          </input>
-          <BestHotel getHotel={getBestHotel} />
-          <Hotels hotels={state.hotels} />
+          {lastHotel ? <LastHotel {...lastHotel} onRemove={removeLastHotel} /> : null}
+          {getBestHotel()
+            ? <BestHotel getHotel={getBestHotel} />
+            : null
+          }
+          <Hotels onOpen={openHotel} hotels={state.hotels} />
         </>
       )
   );
   const menu = <Menu />;
   const footer = <Footer />;
-
-
 
   return (
     <AuthContext.Provider value={{
