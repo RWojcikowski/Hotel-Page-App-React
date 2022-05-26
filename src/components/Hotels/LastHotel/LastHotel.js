@@ -1,5 +1,9 @@
+import useStateStorage from "../../../hooks/useStateStorage";
 
 function LastHotel(props) {
+
+
+  if (!props) return null;
 
   return (
     <div className="card mb-2 bg-light">
@@ -7,8 +11,9 @@ function LastHotel(props) {
         Ostatnio oglądałeś ten hotel. Wciąż zainteresowany?
       </div>
       <div className="card-body">
-        <div className="d-flex justify-content-between">
+        <div className="d-flex  justify-content-between">
           <h5 className="card-title">{props.name}</h5>
+          <h5>Ocena: {props.rating}</h5>
           <span className="badge badge-light">{props.city}</span>
         </div>
         <div

@@ -4,6 +4,7 @@ import hotelImg from '../../../assets/images/hotel.jpg';
 import ThemeContext from '../../../context/themeContext';
 import { useContext } from 'react';
 import useAuth from '../../../hooks/useAuth';
+import { Link } from 'react-router-dom';
 
 
 const propTypes = {
@@ -18,7 +19,7 @@ function Hotel(props) {
   const [auth] = useAuth();
 
   const clickHandler = e => {
-    e.preventDefault();
+    // e.preventDefault();
     props.onOpen(props);
   }
 
@@ -37,16 +38,19 @@ function Hotel(props) {
             <div className="row">
               <div className="col">
                 <p className={styles.title}>{props.name}</p>
-                <span className="badge badge-light">{props.city}</span>
+                <span className="badge badge-secondary">{props.city}</span>
               </div>
               <div className="col text-right">
                 <h5>Ocena: {props.rating}</h5>
-                <a
-                  href="#"
+                <Link
+                  to={`/hotel/${props.id}`}
                   onClick={clickHandler}
-                  className={`btn btn-${theme.color} mt-2 px-4`}>
+                  className={`btn btn-${theme.color} mt-2 px-4`} >
                   Pokaż
-                </a>
+                </Link>
+
+
+
               </div>
             </div>
           </div>
@@ -65,7 +69,7 @@ function Hotel(props) {
         </div>
 
       </div>
-    </div>
+    </div >
   );
 }
 
