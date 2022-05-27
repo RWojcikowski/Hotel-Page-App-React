@@ -32,7 +32,7 @@ function App() {
   const content = (
     <div>
       <Switch>
-        <Route path="/hotele/:id" component={Hotel} />
+        <Route path="/hotel/:id" component={Hotel} />
         <Route path="/wyszukaj/:term" component={Search} />
         <Route path="/" component={Home} />
 
