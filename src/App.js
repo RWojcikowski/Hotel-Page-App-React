@@ -14,44 +14,17 @@ import InsporingQuote from './components/InspiringQuote/InspiringQuote';
 import { reducer, intialState } from './reducer';
 import Home from './pages/Home/Home';
 import Hotel from './pages/Hotel/Hotel'
-import LoadingIcon from './components/UI/LoadingIcon/LoadingIcon';
-
-
-const backendHotels = [
-  {
-    id: 1,
-    name: 'Pod Dębem',
-    city: 'Warszawa',
-    rating: 8.3,
-    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque consequat id lorem vitae accumsan.',
-    image: ''
-  },
-  {
-    id: 2,
-    name: 'Nad Potokiem',
-    city: 'Wrosław',
-    rating: 8.8,
-    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque consequat id lorem vitae accumsan.',
-    image: ''
-  }
-];
+import Search from './pages/Search/Search';
 
 function App() {
   const [state, dispatch] = useReducer(reducer, intialState);
 
 
-  const searchHandler = term => {
-    const newHotels = [...backendHotels]
-      .filter(x => x.name
-        .toLowerCase()
-        .includes(term.toLowerCase()));
-    dispatch({ type: 'set-hotels', hotels: newHotels });
-  }
 
   const header = (
     <Header>
       <InsporingQuote />
-      <Searchbar onSearch={term => searchHandler(term)} />
+      <Searchbar />
       <ThemeButton />
     </Header>
   );
@@ -59,12 +32,12 @@ function App() {
   const content = (
     <div>
       <Switch>
-        <Route path="/hotel/:id" component={Hotel} />
-
+        <Route path="/hotele/:id" component={Hotel} />
+        <Route path="/wyszukaj/:term" component={Search} />
         <Route path="/" component={Home} />
 
       </Switch>
-      {state.loading ? <LoadingIcon /> : null}
+
     </div>
 
   );
