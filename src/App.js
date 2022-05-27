@@ -14,6 +14,7 @@ import InsporingQuote from './components/InspiringQuote/InspiringQuote';
 import { reducer, intialState } from './reducer';
 import Home from './pages/Home/Home';
 import Hotel from './pages/Hotel/Hotel'
+import LoadingIcon from './components/UI/LoadingIcon/LoadingIcon';
 
 
 const backendHotels = [
@@ -56,12 +57,15 @@ function App() {
   );
 
   const content = (
-    <Switch>
-      <Route path="/hotele/:id" component={Hotel} />
+    <div>
+      <Switch>
+        <Route path="/hotel/:id" component={Hotel} />
 
-      <Route path="/" component={Home} />
+        <Route path="/" component={Home} />
 
-    </Switch>
+      </Switch>
+      {state.loading ? <LoadingIcon /> : null}
+    </div>
 
   );
 
