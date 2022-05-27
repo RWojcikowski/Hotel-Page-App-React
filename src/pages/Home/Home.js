@@ -1,10 +1,9 @@
-import { useContext, useEffect, useState, } from 'react';
+import { useEffect, useState, } from 'react';
 import Hotels from '../../components/Hotels/Hotels';
 import BestHotel from '../../components/Hotels/BestHotel/BestHotel';
 import LastHotel from '../../components/Hotels/LastHotel/LastHotel';
 import useStateStorage from '../../hooks/useStateStorage';
 import useWebsiteTitle from '../../hooks/useWebsiteTitle';
-import ReducerContext from '../../context/reducerContext';
 import LoadingIcon from '../../components/UI/LoadingIcon/LoadingIcon';
 
 const backendHotels = [
