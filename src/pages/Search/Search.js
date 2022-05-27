@@ -1,4 +1,8 @@
+import { useParams } from 'react-router-dom';
 export default function Search(props) {
+
+    const { term } = useParams();
+
     const searchHandler = term => {
         // const newHotels = [...backendHotels]
         //   .filter(x => x.name
@@ -10,6 +14,7 @@ export default function Search(props) {
 
     return (
         <div>
-            Wyniki wyszukiwania :
+            <h2>Wyniki wyszukiwania :"{term}"</h2>
         </div>
     )
+}
