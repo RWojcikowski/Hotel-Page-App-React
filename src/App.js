@@ -1,5 +1,5 @@
 import { useReducer } from 'react';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import './App.css';
 import Header from './components/Header/Header';
 import Menu from './components/Menu/Menu';
@@ -13,6 +13,8 @@ import ReducerContext from './context/reducerContext';
 import InsporingQuote from './components/InspiringQuote/InspiringQuote';
 import { reducer, intialState } from './reducer';
 import Home from './pages/Home/Home';
+import Hotel from './pages/Hotel/Hotel'
+
 
 const backendHotels = [
   {
@@ -33,7 +35,6 @@ const backendHotels = [
   }
 ];
 
-
 function App() {
   const [state, dispatch] = useReducer(reducer, intialState);
 
@@ -46,10 +47,6 @@ function App() {
     dispatch({ type: 'set-hotels', hotels: newHotels });
   }
 
-
-
-
-
   const header = (
     <Header>
       <InsporingQuote />
@@ -59,16 +56,12 @@ function App() {
   );
 
   const content = (
-    <>
-      <Route exact path="/">
-        <Home />
-      </Route>
+    <Switch>
+      <Route path="/hotele/:id" component={Hotel} />
 
+      <Route path="/" component={Home} />
 
-      <Route path="/hotel/:id">
-        <h1> To jest jakiś hotel </h1>
-      </Route>
-    </>
+    </Switch>
 
   );
 
@@ -90,6 +83,7 @@ function App() {
             state: state,
             dispatch: dispatch
           }}>
+
             <Layout
               header={header}
               menu={menu}
