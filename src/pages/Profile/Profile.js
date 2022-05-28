@@ -17,7 +17,7 @@ export default function Profile(props) {
             <div className="card-body">
                 <ul className="nav nav-tabs">
                     <li className="nav-item">
-                        <NavLink className="nav-link" to={`${url}`}> Profil</NavLink>
+                        <NavLink className="nav-link text-color-info" exact to={`${url}`}> Profil</NavLink>
                     </li>
                     <li className="nav-item">
                         <NavLink className="nav-link" to={`${url}/hotele`}>Hotele</NavLink>
