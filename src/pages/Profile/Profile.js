@@ -6,6 +6,7 @@ import MyHotel from "./MyHotels/MyHotels";
 export default function Profile(props) {
     const { path, url } = useRouteMatch();
 
+
     console.log(path, url);
 
 

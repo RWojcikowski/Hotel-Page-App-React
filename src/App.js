@@ -18,6 +18,7 @@ import Search from './pages/Search/Search';
 import NotFound from './pages/404/404';
 import Login from './pages/Auth/Login/Login';
 import AuthenticatedRoute from './components/AuthenticatedRoute/AuthenticatedRoute';
+import ErrorBoundary from './hoc/ErrorBoundary';
 
 const Profile = lazy(() => import('./pages/Profile/Profile'));
 
@@ -37,18 +38,20 @@ function App() {
 
   const content = (
     <div>
-      <Suspense fallback={<p>Ładowanie...</p>}>
-        <Switch>
+      <ErrorBoundary>
+        <Suspense fallback={<p>Ładowanie...</p>}>
+          <Switch>
 
-          <AuthenticatedRoute path="/profil" component={Profile} />
-          <Route path="/hotel/:id" component={Hotel} />
-          <Route path="/wyszukaj/:term?" component={Search} />
-          <Route path="/zaloguj" component={Login} />
-          <Route path="/" exact component={Home} />
-          <Route component={NotFound} />
+            <AuthenticatedRoute path="/profil" component={Profile} />
+            <Route path="/hotel/:id" component={Hotel} />
+            <Route path="/wyszukaj/:term?" component={Search} />
+            <Route path="/zaloguj" component={Login} />
+            <Route path="/" exact component={Home} />
+            <Route component={NotFound} />
 
-        </Switch>
-      </Suspense>
+          </Switch>
+        </Suspense>
+      </ErrorBoundary>
     </div >
 
   );
@@ -78,6 +81,7 @@ function App() {
               content={content}
               footer={footer}
             />
+
           </ReducerContext.Provider>
         </ThemeContext.Provider>
       </AuthContext.Provider>
