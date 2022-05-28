@@ -1,5 +1,5 @@
 import { useReducer } from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch, } from 'react-router-dom';
 import './App.css';
 import Header from './components/Header/Header';
 import Menu from './components/Menu/Menu';
@@ -17,6 +17,11 @@ import Hotel from './pages/Hotel/Hotel'
 import Search from './pages/Search/Search';
 import Profile from './pages/Profile/Profile';
 import NotFound from './pages/404/404';
+import Login from './pages/Auth/Login/Login';
+import AuthenticatedRoute from './components/AuthenticatedRoute/AuthenticatedRoute';
+
+
+
 
 function App() {
   const [state, dispatch] = useReducer(reducer, intialState);
@@ -34,9 +39,10 @@ function App() {
   const content = (
     <div>
       <Switch>
+        <AuthenticatedRoute path="/profil" component={Profile} />
         <Route path="/hotel/:id" component={Hotel} />
         <Route path="/wyszukaj/:term?" component={Search} />
-        <Route path="/profil" component={Profile} />
+        <Route path="/zaloguj" component={Login} />
         <Route path="/" exact component={Home} />
         <Route component={NotFound} />
 
