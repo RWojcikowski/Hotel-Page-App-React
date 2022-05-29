@@ -75,7 +75,4 @@ export default function ProfilDetails(props) {
 
     )
 
-
-
-
 }
