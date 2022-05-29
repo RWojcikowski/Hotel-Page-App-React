@@ -12,15 +12,21 @@ export default function Login(props) {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [loading, setLoading] = useState(false);
-
+    const [valid, setValid] = useState(null);
     const submit = (e) => {
         e.preventDefault();
+        setLoading(true);
         setTimeout(() => {
             //Logowanie
-            setAuth(true);
-            history.push('/');
+            if (true) {
+                setAuth(true);
+                history.push('/');
+            } else {
+                setValid(false);
+                setPassword('');
+            }
+            setLoading(false)
         }, 500);
-
     }
 
 
@@ -29,6 +35,11 @@ export default function Login(props) {
 
         <div>
             <h3>Logowanie</h3>
+
+            {valid === false ? (
+                <div className="alert alert-danger">Niepoprawne dane logowania</div>
+            ) : null}
+
             <form onClick={submit}>
                 <div className="form-group">
                     <label>Email</label>
