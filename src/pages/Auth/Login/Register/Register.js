@@ -2,7 +2,7 @@ import { useState } from "react";
 import LoadingButton from "../../../../components/UI/LoadingButton/LoadingButton";
 import { validate } from "../../../../helpers/validations";
 import Input from "../../../../components/Input/Input";
-import axios from "axios";
+import axios from "../../../../axios";
 
 export default function Register(props) {
   const [loading, setLoading] = useState(false);
@@ -29,7 +29,7 @@ export default function Register(props) {
     e.preventDefault();
     setLoading(true);
 
-    const res = await axios.get('https://hotel-page-app-default-rtdb.europe-west1.firebasedatabase.app/users.json/users.json');
+    const res = await axios.get('/users.json');
     console.log(res.data);
 
     setTimeout(() => {
