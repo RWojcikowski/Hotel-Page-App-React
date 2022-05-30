@@ -9,9 +9,9 @@ const withMousePosition = (WrappedComponent) => {
 
     componentDidMount() {
       document.body.addEventListener(
-        'mousemove',
-        this.updateMousePostion.bind(this)
-      );
+          'mousemove', 
+          this.updateMousePostion.bind(this)
+        );
     }
 
     updateMousePostion(e) {

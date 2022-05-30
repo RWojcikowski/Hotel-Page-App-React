@@ -1,8 +1,8 @@
 import React from 'react';
 
 const ReducerContext = React.createContext({
-    state: {},
-    dispatch: () => { },
+  state: {},
+  dispatch: () => { },
 });
 
 ReducerContext.displayName = 'ReducerContext';

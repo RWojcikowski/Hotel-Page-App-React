@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import moment from 'moment';
-import { Link } from "react-router-dom";
+import { Link } from 'react-router-dom';
 
 const BestHotel = (props) => {
   const [time, setTime] = useState('');
@@ -36,7 +36,7 @@ const BestHotel = (props) => {
           <p>Ocena: {hotel.rating}</p>
         </div>
         <p>Do końca oferty pozostało: {time}</p>
-        <Link to={`/hotel/${hotel.id}`} className="btn btn-sm btn-light">
+        <Link to={`/hotele/${hotel.id}`} className="btn btn-sm btn-light">
           Pokaż
         </Link>
       </div>

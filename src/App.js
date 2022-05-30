@@ -1,5 +1,5 @@
 import { useReducer, lazy, Suspense } from 'react';
-import { BrowserRouter as Router, Route, Switch, } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
 import './App.css';
 import Header from './components/Header/Header';
 import Menu from './components/Menu/Menu';
@@ -13,21 +13,19 @@ import ReducerContext from './context/reducerContext';
 import InsporingQuote from './components/InspiringQuote/InspiringQuote';
 import { reducer, intialState } from './reducer';
 import Home from './pages/Home/Home';
-import Hotel from './pages/Hotel/Hotel'
+import Hotel from './pages/Hotel/Hotel';
 import Search from './pages/Search/Search';
 import NotFound from './pages/404/404';
-import Login from './pages/Auth/Login/Login';
+import Login from './pages/Auth/Login/Login/Login';
+import Register from './pages/Auth/Login/Register/Register';
 import AuthenticatedRoute from './hoc/AuthenticatedRoute';
 import ErrorBoundary from './hoc/ErrorBoundary';
 import AddHotel from './pages/Profile/MyHotels/AddHotel/AddHotel';
 
 const Profile = lazy(() => import('./pages/Profile/Profile'));
 
-
 function App() {
   const [state, dispatch] = useReducer(reducer, intialState);
-
-
 
   const header = (
     <Header>
@@ -36,7 +34,6 @@ function App() {
       <ThemeButton />
     </Header>
   );
-
   const content = (
     <div>
       <ErrorBoundary>
@@ -45,19 +42,18 @@ function App() {
 
             <AuthenticatedRoute path="/profil/hotele/dodaj" component={AddHotel} />
             <AuthenticatedRoute path="/profil" component={Profile} />
-            <Route path="/hotel/:id" component={Hotel} />
+            <Route path="/hotele/:id" component={Hotel} />
             <Route path="/wyszukaj/:term?" component={Search} />
             <Route path="/zaloguj" component={Login} />
+            <Route path="/rejstracja" component={Register} />
             <Route path="/" exact component={Home} />
             <Route component={NotFound} />
 
           </Switch>
         </Suspense>
       </ErrorBoundary>
-    </div >
-
+    </div>
   );
-
   const menu = <Menu />;
   const footer = <Footer />;
 
