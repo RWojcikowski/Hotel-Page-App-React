@@ -21,7 +21,7 @@ export default function Profile(props) {
         </ul>
 
         <div className="pt-4">
-          <Switch> 
+          <Switch>
 
             <Route path={`${path}/hotele`} component={MyHotels} />
             <Route path={`${path}`} component={ProfileDetails} />
