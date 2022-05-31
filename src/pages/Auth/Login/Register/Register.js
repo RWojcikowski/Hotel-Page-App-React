@@ -25,6 +25,8 @@ export default function Register(props) {
       rules: ['required']
     },
   });
+
+  const [error, setError] = useState('');
   const valid = !Object.values(form)
     .map(input => input.error)
     .filter(error => error)
@@ -44,6 +46,7 @@ export default function Register(props) {
       setAuth(true, res.data);
       history.push('/')
     } catch (ex) {
+      setError(ex.response.data.error.message);
       console.log(ex.response);
     }
 
@@ -102,6 +105,10 @@ export default function Register(props) {
             onChange={val => changeHandler(val, 'password')}
             error={form.password.error}
             showError={form.password.showError} />
+
+          {error ? (
+            <div className="alert alert-danger">{error}</div>
+          ) : null};
 
           <div className="text-right">
             <LoadingButton
