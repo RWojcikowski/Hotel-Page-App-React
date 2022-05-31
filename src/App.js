@@ -1,4 +1,4 @@
-import { useReducer, lazy, Suspense } from 'react';
+import { useReducer, lazy, Suspense, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
 import './App.css';
 import Header from './components/Header/Header';
@@ -26,6 +26,17 @@ const Profile = lazy(() => import('./pages/Profile/Profile'));
 
 function App() {
   const [state, dispatch] = useReducer(reducer, intialState);
+
+  const checkUser = () => {
+    const tokenData = JSON.stringify(window.localStorage.getItem('token-data'));
+    if (tokenData) {
+      dispatch({ type: 'login' })
+    }
+  }
+
+  useEffect(() => {
+    checkUser()
+  }, [])
 
   const header = (
     <Header>

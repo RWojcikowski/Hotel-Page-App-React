@@ -20,9 +20,7 @@ export default function useAuth() {
     } else {
       // logout
       authContext.logout();
-      if (tokenData) {
-        window.localStorage.removeItem('token-data', JSON.stringify(tokenData));
-      }
+      window.localStorage.removeItem('token-data');
     }
 
   }

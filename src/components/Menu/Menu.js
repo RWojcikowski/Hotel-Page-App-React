@@ -1,6 +1,6 @@
 import style from './Menu.module.css';
 import useAuth from '../../hooks/useAuth';
-import { Link, NavLink } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 function Menu() {
   const [auth, setAuth] = useAuth();
@@ -41,7 +41,9 @@ function Menu() {
               </NavLink>
             </li>
             <li className={style.menuItem}>
-              <NavLink activeClassName={style.menuItemActive} to="/zaloguj">Zaloguj</NavLink>
+              <NavLink activeClassName={style.menuItemActive} to="/zaloguj">
+                Zaloguj
+              </NavLink>
             </li>
           </>
         )
