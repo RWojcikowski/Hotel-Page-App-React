@@ -43,7 +43,14 @@ export default function Register(props) {
         returnSecureToken: true
       });
       //
-      setAuth(true, res.data);
+      setAuth({
+        email: res.data.email,
+        token: res.data.idToken,
+        userId: res.data.localId,
+      });
+
+
+
       history.push('/')
     } catch (ex) {
       setError(ex.response.data.error.message);

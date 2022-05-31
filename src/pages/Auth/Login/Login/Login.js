@@ -25,7 +25,7 @@ export default function Login(props) {
         password,
         returnSecureToken: true
       });
-      setAuth(true, {
+      setAuth({
         email: res.data.email,
         token: res.data.idToken,
         useId: res.data.localId,
