@@ -2,8 +2,12 @@ import { useRef, useState } from 'react';
 import LoadingButton from '../../../../components/UI/LoadingButton/LoadingButton';
 import Input from '../../../../components/Input/Input';
 import { validate } from '../../../../helpers/validations';
+import axios from '../../../../axios';
+import { useHistory } from 'react-router-dom'
+
 
 const AddHotel = props => {
+  const history = useHistory();
   const [form, setForm] = useState({
     name: {
       value: '',
@@ -48,13 +52,26 @@ const AddHotel = props => {
   });
   const [loading, setLoading] = useState(false);
 
-  const submit = e => {
+  const submit = async e => {
     e.preventDefault();
     setLoading(true);
 
-    setTimeout(() => {
-      setLoading(false);
-    }, 500);
+    try {
+      const res = await axios.post('hotels.json', {
+        name: form.name.value,
+        description: form.description.value,
+        city: form.city.value,
+        rooms: form.city.value,
+        features: form.features.value,
+        status: form.status.value,
+      });
+      history.push('profil/hotele');
+    } catch (ex) {
+      console.log(ex.response);
+    }
+
+    setLoading(false);
+
   }
 
   const changeHandler = (value, fieldName) => {

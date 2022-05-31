@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
 import LoadingButton from "../../../components/UI/LoadingButton/LoadingButton";
 import { validateEmail } from "../../../helpers/validations";
-import useAuth from '../../../hooks/useAuth'
+import useAuth from '../../../hooks/useAuth';
+import axios from "../../../axios-auth";
+
 
 export default function ProfilDetails(props) {
-  const [auth] = useAuth();
+  const [auth, setAuth] = useAuth();
   const [email, setEmail] = useState(auth.email);
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
@@ -12,18 +14,38 @@ export default function ProfilDetails(props) {
     email: '',
     password: ''
   });
+  const [success, setSuccess] = useState(false);
   const buttonDisabled = Object.values(errors).filter(x => !x).length;
 
 
-  const submit = (e) => {
+  const submit = async (e) => {
     e.preventDefault();
     setLoading(true);
 
-    setTimeout(() => {
-      //Zapisywanie
+    try {
+      const res = await axios.post('accounts:update', data);
+      const data = {
+        idToken: auth.token,
+        email: email,
+        retrnSecureToken: true
+      };
+      if (password) {
+        data.password = password
+      }
 
-      setLoading(false)
-    }, 500);
+
+
+      setAuth({
+        email: res.data.email,
+        token: res.data.idToken,
+        userId: res.data.localId,
+      });
+      console.log(res);
+      setSuccess(true);
+    } catch (ex) {
+      console.log(ex.response);
+    }
+    setLoading(false)
   }
 
 
@@ -48,6 +70,11 @@ export default function ProfilDetails(props) {
 
   return (
     <form onClick={submit}>
+
+      {success ? (
+        <div className="alert alert-success">Dane zapisane</div>
+      ) : null}
+
       <div className="form-group">
         <label>Email</label>
         <input type="email"
