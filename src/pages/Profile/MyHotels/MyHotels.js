@@ -49,7 +49,7 @@ export default function MyHotels(props) {
         : (
           <p>Nie masz jeszcze żadnego hotelu.</p>
         )
-      };
+      }
 
       <Link to={`${url}/dodaj`} className="btn btn-info">Dodaj hotel</Link>
     </div >
