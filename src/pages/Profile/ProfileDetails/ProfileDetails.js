@@ -23,7 +23,6 @@ export default function ProfilDetails(props) {
     setLoading(true);
 
     try {
-      const res = await axios.post('accounts:update', data);
       const data = {
         idToken: auth.token,
         email: email,
@@ -33,14 +32,13 @@ export default function ProfilDetails(props) {
         data.password = password
       }
 
-
+      const res = await axios.post('accounts:update', data);
 
       setAuth({
         email: res.data.email,
         token: res.data.idToken,
         userId: res.data.localId,
       });
-      console.log(res);
       setSuccess(true);
     } catch (ex) {
       console.log(ex.response);

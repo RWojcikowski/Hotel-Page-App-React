@@ -6,7 +6,6 @@ import { useContext } from 'react';
 import useAuth from '../../../hooks/useAuth';
 import { Link } from 'react-router-dom';
 
-
 const propTypes = {
   name: PropTypes.string.isRequired,
   city: PropTypes.string.isRequired,
@@ -20,7 +19,9 @@ function Hotel(props) {
 
   const clickHandler = e => {
     // e.preventDefault();
-    props.onOpen(props);
+    if (props.onOpen) {
+      props.onOpen(props);
+    }
   }
 
   return (
@@ -41,7 +42,7 @@ function Hotel(props) {
                 <span className="badge bg-info">{props.city}</span>
               </div>
               <div className="col text-right">
-                <h5>Ocena: {props.rating}</h5>
+                <h5>Ocena: {props.rating ?? 0}</h5>
                 <Link
                   onClick={clickHandler}
                   to={`/hotele/${props.id}`}
@@ -58,7 +59,7 @@ function Hotel(props) {
             </p>
 
             {auth
-              ? <p className="mt-2">Dostępność: 4 pokoje</p>
+              ? <p className="mt-2">Dostępność: {props.rooms} pokoje</p>
               : <p className="mt-2">Dostępność: zaloguj</p>
             }
 

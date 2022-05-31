@@ -4,9 +4,11 @@ import Input from '../../../../components/Input/Input';
 import { validate } from '../../../../helpers/validations';
 import axios from '../../../../axios';
 import { useHistory } from 'react-router-dom'
+import useAuth from '../../../../hooks/useAuth';
 
 
 const AddHotel = props => {
+  const [auth] = useAuth();
   const history = useHistory();
   const [form, setForm] = useState({
     name: {
@@ -57,13 +59,14 @@ const AddHotel = props => {
     setLoading(true);
 
     try {
-      const res = await axios.post('hotels.json', {
+      await axios.post('hotels.json', {
         name: form.name.value,
         description: form.description.value,
         city: form.city.value,
-        rooms: form.city.value,
+        rooms: form.rooms.value,
         features: form.features.value,
         status: form.status.value,
+        user_id: auth.userId
       });
       history.push('profil/hotele');
     } catch (ex) {

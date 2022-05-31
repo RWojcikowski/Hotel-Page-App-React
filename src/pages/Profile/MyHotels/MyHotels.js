@@ -1,27 +1,30 @@
 
 import { useEffect, useState } from 'react';
 import { Link, useRouteMatch } from 'react-router-dom';
+import useAuth from '../../../hooks/useAuth';
 import axios from '../../../axios';
 import { objectToArrayWitchId } from '../../../helpers/objects';
 
 export default function MyHotels(props) {
-
+  const [auth] = useAuth();
   const { url } = useRouteMatch();
   const [hotels, setHotels] = useState([]);
 
-  const fechHotels = async () => {
+
+  const fetchHotels = async () => {
     try {
       ///
       const res = await axios.get('/hotels.json');
       const newHotel = objectToArrayWitchId(res.data)
-      setHotels(newHotel);
+        .filter(hotel => hotel.user.id === auth.user.id);
+      setHotels(newHotel)
     } catch (ex) {
       console.log(ex.response);
     }
   }
 
   useEffect(() => {
-    fechHotels();
+    fetchHotels();
   }, [])
 
   return (
