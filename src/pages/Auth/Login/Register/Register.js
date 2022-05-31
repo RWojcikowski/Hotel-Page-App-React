@@ -2,7 +2,7 @@ import { useState } from "react";
 import LoadingButton from "../../../../components/UI/LoadingButton/LoadingButton";
 import { validate } from "../../../../helpers/validations";
 import Input from "../../../../components/Input/Input";
-import axiosFresh from "axios";
+import axios from '../../../../axios-auth';
 import useAuth from "../../../../hooks/useAuth"
 import { useHistory } from "react-router-dom";
 
@@ -37,7 +37,7 @@ export default function Register(props) {
     setLoading(true);
 
     try {
-      const res = await axiosFresh.post('https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyAWotdJSYsGbVUisJakVVmO_dK4NnrX9Uk', {
+      const res = await axios.post('accounts:signUp', {
         email: form.email.value,
         password: form.password.value,
         returnSecureToken: true
@@ -52,7 +52,7 @@ export default function Register(props) {
 
 
 
-    const res = await axiosFresh.post('https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyAWotdJSYsGbVUisJakVVmO_dK4NnrX9Uk', {
+    const res = await axios.post('accounts:signUp', {
       email: form.email.value,
       password: form.password.value,
       returnSecureToken: true

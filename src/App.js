@@ -27,16 +27,10 @@ const Profile = lazy(() => import('./pages/Profile/Profile'));
 function App() {
   const [state, dispatch] = useReducer(reducer, intialState);
 
-  const checkUser = () => {
-    const tokenData = JSON.stringify(window.localStorage.getItem('token-data'));
-    if (tokenData) {
-      dispatch({ type: 'login' })
-    }
-  }
 
-  useEffect(() => {
-    checkUser()
-  }, [])
+  // useEffect(() => {
+  //   checkUser();
+  // }, [])
 
   const header = (
     <Header>

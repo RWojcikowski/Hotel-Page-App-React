@@ -2,7 +2,7 @@ import { useId, useState } from "react";
 import useAuth from "../../../../hooks/useAuth";
 import { useHistory } from 'react-router-dom';
 import LoadingButton from "../../../../components/UI/LoadingButton/LoadingButton";
-import axiosFresh from "axios";
+import axios from '../../../../axios-auth';
 
 
 export default function Login(props) {
@@ -20,7 +20,7 @@ export default function Login(props) {
     setLoading(true);
 
     try {
-      const res = await axiosFresh.post('https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyAWotdJSYsGbVUisJakVVmO_dK4NnrX9Uk', {
+      const res = await axios.post('accounts:signInWithPassword', {
         email,
         password,
         returnSecureToken: true
@@ -31,12 +31,14 @@ export default function Login(props) {
         useId: res.data.localId,
       })
       history.push('/');
-
     } catch (ex) {
       setError(ex.response.data.error.message);
       console.log(ex.response);
       setLoading(false);
     }
+  }
+  if (auth) {
+    history.push('/')
 
   }
 
