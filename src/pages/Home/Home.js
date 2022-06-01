@@ -6,7 +6,7 @@ import BestHotel from '../../components/Hotels/BestHotel/BestHotel';
 import Hotels from '../../components/Hotels/Hotels';
 import LoadingIcon from '../../components/UI/LoadingIcon/LoadingIcon';
 import axios from '../../axios';
-import { objectToArrayWitchId } from '../../helpers/objects';
+import { objectToArrayWithId } from '../../helpers/objects';
 
 export default function Home(props) {
   useWebsiteTitle('Strona główna');
@@ -24,14 +24,12 @@ export default function Home(props) {
   }
   const openHotel = (hotel) => setLastHotel(hotel);
   const removeLastHotel = () => setLastHotel(null);
-
   const fetchHotels = async () => {
     try {
-      ///
       const res = await axios.get('/hotels.json');
-      const newHotel = objectToArrayWitchId(res.data)
-        .filter(hotel => hotel.status === 1);
-      setHotels(newHotel)
+      const newHotels = objectToArrayWithId(res.data)
+                    .filter(hotel => hotel.status == 1);
+      setHotels(newHotels);
     } catch (ex) {
       console.log(ex.response);
     }
@@ -46,8 +44,8 @@ export default function Home(props) {
   return loading ? <LoadingIcon /> : (
     <>
       {lastHotel ? <LastHotel {...lastHotel} onRemove={removeLastHotel} /> : null}
-      {getBestHotel()
-        ? <BestHotel getHotel={getBestHotel} />
+      {getBestHotel() 
+        ? <BestHotel getHotel={getBestHotel} /> 
         : null
       }
       <Hotels onOpen={openHotel} hotels={hotels} />

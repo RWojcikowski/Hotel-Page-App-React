@@ -1,7 +1,8 @@
+import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { objectToArrayWitchId } from '../../helpers/objects';
+import { objectToArrayWithId } from '../../helpers/objects';
 import axios from '../../axios';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import Hotels from '../../components/Hotels/Hotels';
 
 export default function Search(props) {
@@ -10,28 +11,23 @@ export default function Search(props) {
 
   const search = async () => {
     try {
-      ///
       const res = await axios.get('/hotels.json');
-      const newHotel = objectToArrayWitchId(res.data)
-        .filter(hotel => hotel.name.includes(term));
-      setHotels(newHotel)
+      const newHotels = objectToArrayWithId(res.data)
+                    .filter(hotel => hotel.name.includes(term));
+      setHotels(newHotels);
     } catch (ex) {
       console.log(ex.response);
     }
-
   }
+
   useEffect(() => {
     search();
-  }, [term])
-
-
+  }, [term]);
 
   return (
     <div>
       <h2>Wyniki dla frazy "{term}":</h2>
       <Hotels hotels={hotels} />
-
     </div>
   );
-
 }

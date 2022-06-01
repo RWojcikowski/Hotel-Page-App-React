@@ -1,10 +1,11 @@
 import PropTypes from 'prop-types';
 import styles from './Hotel.module.css';
-import hotelImg from '../../../assets/images/hotel.jpg';
+
 import ThemeContext from '../../../context/themeContext';
 import { useContext } from 'react';
 import useAuth from '../../../hooks/useAuth';
 import { Link } from 'react-router-dom';
+
 
 const propTypes = {
   name: PropTypes.string.isRequired,
@@ -31,7 +32,7 @@ function Hotel(props) {
         <div className="row">
           <div className="col-4">
             <img
-              src={hotelImg}
+              src={`https://placeimg.com/220/18${Math.floor(Math.random() * 10)}/arch`}
               alt=""
               className="img-fluid img-thumbnail" />
           </div>
@@ -39,7 +40,7 @@ function Hotel(props) {
             <div className="row">
               <div className="col">
                 <p className={styles.title}>{props.name}</p>
-                <span className="badge bg-info">{props.city}</span>
+                <span className="badge badge-light">{props.city}</span>
               </div>
               <div className="col text-right">
                 <h5>Ocena: {props.rating ?? 0}</h5>

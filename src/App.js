@@ -16,21 +16,17 @@ import Home from './pages/Home/Home';
 import Hotel from './pages/Hotel/Hotel';
 import Search from './pages/Search/Search';
 import NotFound from './pages/404/404';
-import Login from './pages/Auth/Login/Login/Login';
-import Register from './pages/Auth/Login/Register/Register';
+import Login from './pages/Auth/Login/Login';
+import Register from './pages/Auth/Register/Register';
 import AuthenticatedRoute from './hoc/AuthenticatedRoute';
 import ErrorBoundary from './hoc/ErrorBoundary';
 import AddHotel from './pages/Profile/MyHotels/AddHotel/AddHotel';
+import EditHotel from './pages/Profile/MyHotels/EditHotel/EditHotel';
 
 const Profile = lazy(() => import('./pages/Profile/Profile'));
 
 function App() {
   const [state, dispatch] = useReducer(reducer, intialState);
-
-
-  // useEffect(() => {
-  //   checkUser();
-  // }, [])
 
   const header = (
     <Header>
@@ -43,8 +39,9 @@ function App() {
     <div>
       <ErrorBoundary>
         <Suspense fallback={<p>Ładowanie...</p>}>
-          <Switch>
+          <Switch> 
 
+            <AuthenticatedRoute path="/profil/hotele/edytuj/:id" component={EditHotel} />
             <AuthenticatedRoute path="/profil/hotele/dodaj" component={AddHotel} />
             <AuthenticatedRoute path="/profil" component={Profile} />
             <Route path="/hotele/:id" component={Hotel} />
@@ -64,7 +61,7 @@ function App() {
 
   return (
     <Router>
-      <AuthContext.Provider value={{
+      <AuthContext.Provider value={{ 
         user: state.user,
         login: (user) => dispatch({ type: 'login', user }),
         logout: () => dispatch({ type: 'logout' }),
@@ -77,7 +74,7 @@ function App() {
             state: state,
             dispatch: dispatch
           }}>
-
+            
             <Layout
               header={header}
               menu={menu}
