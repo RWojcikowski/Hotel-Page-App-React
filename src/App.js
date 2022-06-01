@@ -1,11 +1,11 @@
 import { useReducer, lazy, Suspense, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
 import './App.css';
-import Header from './components/Header/Header';
-import Menu from './components/Menu/Menu';
+import Header from './components/Layout/Header/Header';
+import Menu from './components/Layout/Menu/Menu';
 import Searchbar from './components/UI/Searchbar/Searchbar';
 import Layout from './components/Layout/Layout';
-import Footer from './components/Footer/Footer';
+import Footer from './components/Layout/Footer/Footer';
 import ThemeButton from './components/UI/ThemeButton/ThemeButton';
 import ThemeContext from './context/themeContext';
 import AuthContext from './context/authContext';
@@ -39,7 +39,7 @@ function App() {
     <div>
       <ErrorBoundary>
         <Suspense fallback={<p>Ładowanie...</p>}>
-          <Switch> 
+          <Switch>
 
             <AuthenticatedRoute path="/profil/hotele/edytuj/:id" component={EditHotel} />
             <AuthenticatedRoute path="/profil/hotele/dodaj" component={AddHotel} />
@@ -61,7 +61,7 @@ function App() {
 
   return (
     <Router>
-      <AuthContext.Provider value={{ 
+      <AuthContext.Provider value={{
         user: state.user,
         login: (user) => dispatch({ type: 'login', user }),
         logout: () => dispatch({ type: 'logout' }),
@@ -74,7 +74,7 @@ function App() {
             state: state,
             dispatch: dispatch
           }}>
-            
+
             <Layout
               header={header}
               menu={menu}
