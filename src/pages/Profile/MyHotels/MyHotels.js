@@ -9,16 +9,6 @@ export default function MyHotels(props) {
   const { url } = useRouteMatch();
   const [hotels, setHotels] = useState([]);
 
-  const fetchHotels = async () => {
-    try {
-      const res = await axios.get('/hotels.json');
-      const newHotel = objectToArrayWithId(res.data)
-        .filter(hotel => hotel.user_id === auth.userId);
-      setHotels(newHotel);
-    } catch (ex) {
-      console.log(ex.response);
-    }
-  }
 
   const deleteHandler = async id => {
     try {
@@ -30,24 +20,36 @@ export default function MyHotels(props) {
   }
 
   useEffect(() => {
+    const fetchHotels = async () => {
+      try {
+        const res = await axios.get('/hotels.json');
+        const newHotel = objectToArrayWithId(res.data)
+          .filter(hotel => hotel.user_id === auth.userId);
+        setHotels(newHotel);
+      } catch (ex) {
+        console.log(ex.response);
+      }
+    }
     fetchHotels();
-  }, []);
+  }, [auth.userId]);
 
   return (
     <div>
       {hotels ? (
         <table className="table">
           <thead>
-            <th>Nazwa</th>
-            <th>Status</th>
-            <th>Opcje</th>
+            <tr>
+              <th>Nazwa</th>
+              <th>Status</th>
+              <th>Opcje</th>
+            </tr>
           </thead>
           <tbody>
             {hotels.map(hotel => (
-              <tr>
+              <tr key={hotel.id}>
                 <td>{hotel.name}</td>
                 <td>
-                  {hotel.status == 1
+                  {parseInt(hotel.status) === 1
                     ? <span className="badge bg-success text-light">aktywny</span>
                     : <span className="badge bg-warning text-light">ukryty</span>
                   }
