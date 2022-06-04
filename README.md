@@ -1,7 +1,7 @@
 # Link to demo 
 https://hotel-page-app.web.app/ 
 
-#Some methods and technologies used in the application.
+# Some methods and technologies used in the application.
 
 - create-react-app ;
 - React v18.1.0;
