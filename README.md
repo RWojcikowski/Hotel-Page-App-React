@@ -15,6 +15,7 @@ https://hotel-page-app.web.app/
 - axios;
 - firebase for authentication and database;
 - automatic photo generation with:(https://placeimg.com)
+-moment.js (for which counts down the time until the end of the offer)
 
 # A little preview
 Mouse Position</br>
