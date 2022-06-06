@@ -4,11 +4,11 @@ import { Link } from 'react-router-dom';
 
 const BestHotel = (props) => {
   const [time, setTime] = useState('');
-
+  
   const hotel = props.getHotel();
-  const endTime = moment().add(23, 'minutes').add(34, 'seconds');
+  const endTime = moment().add(23, 'minutes').add(30, 'seconds');
   let interval = useRef(null);
-
+  
 
   // componentDidMount()
   useEffect(() => {
@@ -23,7 +23,7 @@ const BestHotel = (props) => {
     return () => {
       clearInterval(interval.current);
     }
-  }, [endTime]);
+  }, []);
 
   return (
     <div className="card bg-info text-white">
